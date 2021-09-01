@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+component "user-app" as userapp
+component "admin-app" as adminapp
+node "server" as srv {
+    component "authentication-module" as auth
+    component "user-api" as userapi
+    component "admin-api" as adminapi
+    component "admin-logic" as adminlogic
+    component "user-logic" as userlogic
+    database "user-db" as userdb
+    database "bookings-db" as bookingdb
+}
+
+adminapp -- adminapi
+userapp -- userapi
+
+auth -- userdb
+adminapi -- adminlogic
+userapi -- userlogic
+userapi -- auth
+adminapi -- auth
+userlogic -- bookingdb
+adminlogic -- userdb
+adminlogic -- bookingdb
+@enduml
